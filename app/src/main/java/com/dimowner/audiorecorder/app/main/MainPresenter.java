@@ -44,6 +44,7 @@ import com.dimowner.audiorecorder.exception.ErrorParser;
 import com.dimowner.audiorecorder.util.AndroidUtils;
 import com.dimowner.audiorecorder.util.FileUtil;
 import com.dimowner.audiorecorder.util.TimeUtils;
+import com.dimowner.audiorecorder.app.Mark;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -73,6 +74,7 @@ public class MainPresenter implements MainContract.UserActionsListener {
 	private Record record;
 	private boolean deleteRecord = false;
 	private boolean listenPlaybackProgress = true;
+	private Mark mark;
 
 	/** Flag true defines that presenter called to show import progress when view was not bind.
 	 * And after view bind we need to show import progress.*/
@@ -97,6 +99,7 @@ public class MainPresenter implements MainContract.UserActionsListener {
 		this.audioPlayer = audioPlayer;
 		this.appRecorder = appRecorder;
 		this.settingsMapper = settingsMapper;
+		this.mark = new Mark();
 	}
 
 	@Override
@@ -175,6 +178,8 @@ public class MainPresenter implements MainContract.UserActionsListener {
 							view.showOptionsMenu();
 						}
 						updateInformation(rec.getFormat(), rec.getSampleRate(), rec.getSize());
+
+						mark.finishMark();
 					}
 					if (view != null) {
 						view.keepScreenOn(false);
@@ -466,6 +471,8 @@ public class MainPresenter implements MainContract.UserActionsListener {
 									view.showName(name);
 								}
 							});
+
+							mark.renameMark(name);
 						} else {
 							AndroidUtils.runOnUIThread(() -> {
 								if (view != null) {
@@ -639,8 +646,14 @@ public class MainPresenter implements MainContract.UserActionsListener {
 
 		if (view != null) {
 			Timber.d("onMarkClick triggered2");
-			view.askTestAdditional(TimeUtils.formatTimeIntervalMinSecMills(appRecorder.getRecordingDuration()));
+			mark.addMarkPoint(appRecorder.getRecordingDuration(), "mark1");
+			view.askTestAdditional(TimeUtils.formatSrtTime(appRecorder.getRecordingDuration()));
 		}
+	}
+
+	public void startMark(Context context) {
+		mark.startMark(context, "temp.srt");
+		//
 	}
 
 	private void updateInformation(String format, int sampleRate, long size) {

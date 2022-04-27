@@ -331,6 +331,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 					presenter.pauseUnpauseRecording(getApplicationContext());
 				}
 			}
+			presenter.startMark(getApplicationContext());
 		} else if (id == R.id.btn_record_stop) {
 			presenter.stopRecording(false);
 		} else if (id == R.id.btn_record_delete) {

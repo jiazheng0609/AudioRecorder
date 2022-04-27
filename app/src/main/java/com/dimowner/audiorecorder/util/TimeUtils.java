@@ -127,6 +127,14 @@ public class TimeUtils {
 		}
 	}
 
+	public static String formatSrtTime(long mills) {
+		long hour = mills / (60 * 60 * 1000);
+		long min = mills / (60 * 1000) % 60;
+		long sec = (mills / 1000) % 60;
+		long m = mills % 1000;
+		return String.format(Locale.getDefault(), "%02d:%02d:%02d,%03d", hour, min, sec, m);
+	}
+
 //	public static String formatDateSmart(long time, Context ctx) {
 //		if (time <= 0) {
 //			return "Wrong date!";
