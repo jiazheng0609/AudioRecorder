@@ -28,6 +28,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -103,6 +104,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	private ImageButton btnRecordingStop;
 	private ImageButton btnShare;
 	private ImageButton btnImport;
+	private ImageButton btnTestAddional;
 	private ProgressBar progressBar;
 	private SeekBar playProgress;
 	private LinearLayout pnlImportProgress;
@@ -182,6 +184,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		pnlRecordProcessing = findViewById(R.id.pnl_record_processing);
 		ivPlaceholder = findViewById(R.id.placeholder);
 		ivPlaceholder.setImageResource(R.drawable.waveform);
+		btnTestAddional = findViewById(R.id.btn_test_additional);
 
 		txtProgress.setText(TimeUtils.formatTimeIntervalHourMinSec2(0));
 
@@ -189,6 +192,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnDelete.setEnabled(false);
 		btnRecordingStop.setVisibility(View.INVISIBLE);
 		btnRecordingStop.setEnabled(false);
+		btnTestAddional.setVisibility(View.INVISIBLE);
+		btnTestAddional.setEnabled(false);
 
 		btnPlay.setOnClickListener(this);
 		btnRecord.setOnClickListener(this);
@@ -199,6 +204,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnSettings.setOnClickListener(this);
 		btnShare.setOnClickListener(this);
 		btnImport.setOnClickListener(this);
+		btnTestAddional.setOnClickListener(this);
 		txtName.setOnClickListener(this);
 		space = getResources().getDimension(R.dimen.spacing_xnormal);
 
@@ -347,6 +353,9 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 			}
 		} else if (id == R.id.txt_name) {
 			presenter.onRenameRecordClick();
+		} else if (id == R.id.btn_test_additional) {
+			Timber.d("Test Button OnClick");
+			presenter.onMarkClick();
 		}
 	}
 
@@ -424,6 +433,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnShare.setVisibility(View.GONE);
 		btnDelete.setVisibility(View.VISIBLE);
 		btnDelete.setEnabled(true);
+		btnTestAddional.setVisibility(View.VISIBLE);
+		btnTestAddional.setEnabled(true);
 		btnRecordingStop.setVisibility(View.VISIBLE);
 		btnRecordingStop.setEnabled(true);
 		playProgress.setProgress(0);
@@ -453,6 +464,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		playProgress.setEnabled(true);
 		btnDelete.setVisibility(View.INVISIBLE);
 		btnDelete.setEnabled(false);
+		btnTestAddional.setVisibility(View.INVISIBLE);
+		btnTestAddional.setEnabled(false);
 		btnRecordingStop.setVisibility(View.INVISIBLE);
 		btnRecordingStop.setEnabled(false);
 		waveformView.setVisibility(View.VISIBLE);
@@ -477,6 +490,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnRecord.setImageResource(R.drawable.ic_record_rec);
 		btnDelete.setVisibility(View.VISIBLE);
 		btnDelete.setEnabled(true);
+		btnTestAddional.setVisibility(View.VISIBLE);
+		btnTestAddional.setEnabled(true);
 		btnRecordingStop.setVisibility(View.VISIBLE);
 		btnRecordingStop.setEnabled(true);
 		playProgress.setEnabled(false);
@@ -502,6 +517,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnShare.setVisibility(View.GONE);
 		btnDelete.setVisibility(View.VISIBLE);
 		btnDelete.setEnabled(true);
+		btnTestAddional.setVisibility(View.VISIBLE);
+		btnTestAddional.setEnabled(true);
 		btnRecordingStop.setVisibility(View.VISIBLE);
 		btnRecordingStop.setEnabled(true);
 		playProgress.setProgress(0);
@@ -662,6 +679,18 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 				R.drawable.ic_delete_forever_dark,
 				getString(R.string.warning),
 				getString(R.string.delete_this_record),
+				v -> presenter.stopRecording(true)
+		);
+	}
+
+	@Override
+	public void askTestAdditional(String durationT) {
+		Timber.d("askTestAdditional triggered");
+		AndroidUtils.showDialogYesNo(
+				MainActivity.this,
+				R.drawable.ic_bookmark_dark,
+				getString(R.string.test_addition),
+				getString(R.string.test_addition_2, durationT),
 				v -> presenter.stopRecording(true)
 		);
 	}

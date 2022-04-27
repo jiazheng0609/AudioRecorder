@@ -316,6 +316,19 @@
 					android:src="@drawable/ic_delete_forever_36"/>
 
 			<ImageButton
+				android:id="@+id/btn_test_additional"
+				android:layout_width="42dp"
+				android:layout_height="42dp"
+				android:background="?android:selectableItemBackgroundBorderless"
+				android:contentDescription="@string/test_addition"
+				android:layout_margin="@dimen/spacing_xtiny"
+				android:layout_gravity="center"
+				android:scaleType="center"
+				android:visibility="invisible"
+				android:src="@drawable/ic_bookmark"/>
+
+
+			<ImageButton
 					android:id="@+id/btn_record"
 					android:layout_width="@dimen/bottom_pnl_btn_size"
 					android:layout_height="@dimen/bottom_pnl_btn_size"

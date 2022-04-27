@@ -69,6 +69,8 @@ public interface MainContract {
 
 		void askDeleteRecord(String name);
 
+		void askTestAdditional(String durationT);
+
 		void askDeleteRecordForever();
 
 		void showRecordInfo(RecordInfo info);
@@ -127,6 +129,8 @@ public interface MainContract {
 		void onSaveAsClick();
 
 		void onDeleteClick();
+
+		void onMarkClick(); // TEST additional
 
 		//TODO: Remove this getters
 		boolean isStorePublic();

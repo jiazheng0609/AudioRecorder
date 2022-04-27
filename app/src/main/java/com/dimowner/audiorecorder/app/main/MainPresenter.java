@@ -633,6 +633,16 @@ public class MainPresenter implements MainContract.UserActionsListener {
 		}
 	}
 
+	@Override
+	public void onMarkClick() {
+		Timber.d("onMarkClick triggered1"+view+record);
+
+		if (view != null) {
+			Timber.d("onMarkClick triggered2");
+			view.askTestAdditional(TimeUtils.formatTimeIntervalMinSecMills(appRecorder.getRecordingDuration()));
+		}
+	}
+
 	private void updateInformation(String format, int sampleRate, long size) {
 		if (format.equals(AppConstants.FORMAT_3GP)) {
 			if (view != null) {
