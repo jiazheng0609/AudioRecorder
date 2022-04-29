@@ -287,4 +287,5 @@
     <string name="app_widget_description">Start recording widget</string>
     <string name="test_addition">標記按鈕</string>
     <string name="test_addition_2">測試 %s</string>
+    <string name="share_mark">分享標記</string>
 </resources>

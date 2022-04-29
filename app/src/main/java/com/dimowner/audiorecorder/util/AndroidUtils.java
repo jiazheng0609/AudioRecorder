@@ -358,6 +358,27 @@ public class AndroidUtils {
 		}
 	}
 
+	public static void shareMarkFile(Context context, String sharePath, String name) {
+		if (sharePath != null) {
+			Uri fileUri = FileProvider.getUriForFile(
+					context,
+					context.getApplicationContext().getPackageName() + ".app_file_provider",
+					new File(sharePath)
+			);
+			Intent share = new Intent(Intent.ACTION_SEND);
+			share.setType("application/octet-stream");
+			share.putExtra(Intent.EXTRA_STREAM, fileUri);
+			share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+			Intent chooser = Intent.createChooser(share, context.getResources().getString(R.string.share_record, name));
+			chooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(chooser);
+		} else {
+			Timber.e("There no record selected!");
+			Toast.makeText(context, R.string.please_select_record_to_share, Toast.LENGTH_LONG).show();
+		}
+	}
+
 	public static void shareAudioFiles(Context context, List<String> list) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_SEND_MULTIPLE);

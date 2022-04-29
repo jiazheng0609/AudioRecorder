@@ -59,6 +59,7 @@ import com.dimowner.audiorecorder.util.AnimationUtil;
 import com.dimowner.audiorecorder.util.FileUtil;
 import com.dimowner.audiorecorder.util.TimeUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -260,6 +261,10 @@ public class RecordsActivity extends Activity implements RecordsContract.View, V
 		adapter.setOnItemOptionListener((menuId, item) -> {
 			if (menuId == R.id.menu_share) {
 				AndroidUtils.shareAudioFile(getApplicationContext(), item.getPath(), item.getName(), item.getFormat());
+			} else if (menuId == R.id.menu_share_mark) {
+				File fileN = new File(item.getPath());
+				String pathN = fileN.getParentFile().getPath() + '/' + item.getName() + ".srt";
+				AndroidUtils.shareMarkFile(getApplicationContext(), pathN, item.getName());
 			} else if (menuId == R.id.menu_info) {
 				presenter.onRecordInfo(Mapper.toRecordInfo(item));
 			} else if (menuId == R.id.menu_rename) {
