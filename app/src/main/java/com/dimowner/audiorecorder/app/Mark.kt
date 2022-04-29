@@ -17,12 +17,12 @@ class Mark {
 
     }
 
-    fun startMark(context: Context, filename: String) {
-        var filenameExt = filename + ".srt"
+    fun startMark(context: Context, name: String) {
+        var filenameExt = name + ".srt"
         contentOut = ""
         path = FileUtil.getPrivateRecordsDir(context).absolutePath +  filenameExt
         file = FileUtil.createFile(FileUtil.getPrivateRecordsDir(context), filenameExt)
-        Log.d("jiazheng.mark", "mark start called "+path)
+        Log.d("jiazheng.mark", "mark start called " + path)
 
 
     }

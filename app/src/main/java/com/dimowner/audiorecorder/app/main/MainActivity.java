@@ -331,7 +331,6 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 					presenter.pauseUnpauseRecording(getApplicationContext());
 				}
 			}
-			presenter.startMark(getApplicationContext());
 		} else if (id == R.id.btn_record_stop) {
 			presenter.stopRecording(false);
 		} else if (id == R.id.btn_record_delete) {
@@ -550,7 +549,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	@Override
 	public void startRecordingService() {
 		try {
-			String path = fileRepository.provideRecordFile().getAbsolutePath();
+			File provideRecordFile =  fileRepository.provideRecordFile();
+			String path = provideRecordFile.getAbsolutePath();
+			String name = provideRecordFile.getName();
+			presenter.startMark(getApplicationContext(), FileUtil.removeFileExtension(name));
 			Intent intent = new Intent(getApplicationContext(), RecordingService.class);
 			intent.setAction(RecordingService.ACTION_START_RECORDING_SERVICE);
 			intent.putExtra(RecordingService.EXTRAS_KEY_RECORD_PATH, path);

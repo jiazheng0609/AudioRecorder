@@ -132,7 +132,7 @@ public interface MainContract {
 
 		void onMarkClick(); // TEST additional
 
-		void startMark(Context context);
+		void startMark(Context context, String name);
 
 		//TODO: Remove this getters
 		boolean isStorePublic();

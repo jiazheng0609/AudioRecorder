@@ -651,9 +651,8 @@ public class MainPresenter implements MainContract.UserActionsListener {
 		}
 	}
 
-	public void startMark(Context context) {
-		mark.startMark(context, "temp.srt");
-		//
+	public void startMark(Context context, String name) {
+		mark.startMark(context, name);
 	}
 
 	private void updateInformation(String format, int sampleRate, long size) {
