@@ -81,6 +81,8 @@ public interface MainContract {
 
 		void shareRecord(Record record);
 
+		void shareMark(Record record);
+
 		void openFile(Record record);
 
 		void downloadRecord(Record record);
@@ -121,6 +123,8 @@ public interface MainContract {
 		void setStoragePrivate(Context context);
 
 		void onShareRecordClick();
+
+		void onShareMarkClick();
 
 		void onRenameRecordClick();
 
