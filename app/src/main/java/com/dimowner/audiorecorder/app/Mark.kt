@@ -10,6 +10,7 @@ class Mark {
 
     private lateinit var file: File
     private var contentOut: String = ""
+    private var _name: String = ""
     private var counter: Int = 0
     private var path: String = ""
 
@@ -18,8 +19,8 @@ class Mark {
     }
 
     fun startMark(context: Context, name: String) {
+        _name = name
         var filenameExt = name + ".srt"
-        contentOut = ""
         path = FileUtil.getPrivateRecordsDir(context).absolutePath +  filenameExt
         file = FileUtil.createFile(FileUtil.getPrivateRecordsDir(context), filenameExt)
         Log.d("jiazheng.mark", "mark start called " + path)
@@ -33,13 +34,18 @@ class Mark {
         contentOut = contentOut + counter.toString() + '\n' + timeStart + " --> " + timeEnd  + '\n' + msg + "\n\n"
     }
 
-    fun finishMark() {
+    fun finishMark(name: String) {
         file.writeText(contentOut)
+        if (name != _name)
+            renameMark(name)
+        contentOut = ""
+        _name = ""
     }
 
     fun renameMark(newName: String) {
-        FileUtil.renameFile(file, newName, "srt")
-        Log.d("jiazheng.mark", "rename " + path + " to " + newName)
+        if (FileUtil.renameFile(file, newName, "srt")) {
+            Log.d("jiazheng.mark", "rename " + path + " to " + newName)
+        }
     }
 
 }

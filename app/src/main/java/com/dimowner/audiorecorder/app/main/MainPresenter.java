@@ -179,7 +179,7 @@ public class MainPresenter implements MainContract.UserActionsListener {
 						}
 						updateInformation(rec.getFormat(), rec.getSampleRate(), rec.getSize());
 
-						mark.finishMark();
+						mark.finishMark(rec.getName());
 					}
 					if (view != null) {
 						view.keepScreenOn(false);
