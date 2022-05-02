@@ -46,6 +46,7 @@ class RecordingWaveformView @JvmOverloads constructor(
 	private val waveformPaint = Paint()
 	private val gridPaint = Paint()
 	private val scrubberPaint = Paint()
+	private val markPaint = Paint()
 	private val textPaint = TextPaint(TextPaint.ANTI_ALIAS_FLAG)
 
 	private var textHeight = 0f
@@ -55,6 +56,7 @@ class RecordingWaveformView @JvmOverloads constructor(
 	private var viewHeightPx = 0
 
 	private val recordingData: MutableList<Int> = LinkedList<Int>()
+	private val markData: MutableList<Int> = LinkedList<Int>()
 	lateinit var drawLinesArray: FloatArray
 	private var totalRecordingSize: Int = 0
 
@@ -81,6 +83,11 @@ class RecordingWaveformView @JvmOverloads constructor(
 		scrubberPaint.strokeWidth = AndroidUtils.dpToPx(2)
 		scrubberPaint.color = ContextCompat.getColor(context, R.color.md_yellow_A700)
 
+		markPaint.style = Paint.Style.STROKE
+		markPaint.strokeWidth = AndroidUtils.dpToPx(1)
+		markPaint.isAntiAlias = true
+		markPaint.color = ContextCompat.getColor(context, R.color.md_yellow_A700)
+
 		gridPaint.color = ContextCompat.getColor(context, R.color.md_grey_100_75)
 		gridPaint.strokeWidth = AndroidUtils.dpToPx(1) / 2
 
@@ -101,6 +108,13 @@ class RecordingWaveformView @JvmOverloads constructor(
 			recordingData.removeAt(0)
 		}
 		invalidate()
+	}
+
+	fun addRecordMark(amp: Int, mills: Long) {
+		markData.add(amp)
+		if (markData.size > pxToSample(viewWidthPx / 2)) {
+			markData.removeAt(0)
+		}
 	}
 
 	fun setRecordingData(data: IntArrayList, durationMills: Long) {
@@ -133,6 +147,7 @@ class RecordingWaveformView @JvmOverloads constructor(
 
 	fun reset() {
 		recordingData.clear()
+		markData.clear()
 		totalRecordingSize = 0
 
 		durationMills = 0
@@ -182,6 +197,7 @@ class RecordingWaveformView @JvmOverloads constructor(
 		super.onDraw(canvas)
 		drawGrid(canvas)
 		drawRecordingWaveform(canvas)
+		drawMark(canvas)
 		//Draw scrubber
 		canvas.drawLine(viewWidthPx / 2f, 0f, viewWidthPx / 2f, height.toFloat(), scrubberPaint)
 	}
@@ -240,6 +256,31 @@ class RecordingWaveformView @JvmOverloads constructor(
 				}
 			}
 			canvas.drawLines(drawLinesArray, 0, drawLinesArray.size, waveformPaint)
+		}
+	}
+
+	private fun drawMark(canvas: Canvas) {
+		if (markData.isNotEmpty()) {
+			clearDrawLines()
+			val halfWidth = viewWidthPx / 2
+			val endPx = if (durationPx < halfWidth) { durationPx.toInt() } else { halfWidth }
+			var step = 0
+			for (index in 0 until endPx ) {
+				var sampleIndex = pxToSample(index).toInt()
+				if (sampleIndex >= markData.size) {
+					sampleIndex = markData.size - 1
+				}
+				val xPos = (viewWidthPx / 2 - index).toFloat()
+				if (xPos >= 0 && xPos <= viewWidthPx && step + 3 < drawLinesArray.size
+					&& markData[markData.size - 1 - sampleIndex] > 0) {  // Draw only visible part of waveform
+					drawLinesArray[step] = xPos
+					drawLinesArray[step + 1] = textIndent
+					drawLinesArray[step + 2] = xPos
+					drawLinesArray[step + 3] = height - textIndent
+					step += 4
+				}
+			}
+			canvas.drawLines(drawLinesArray, 0, drawLinesArray.size, markPaint)
 		}
 	}
 

@@ -155,6 +155,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		return new Intent(context, MainActivity.class);
 	}
 
+	private int markEnable = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		colorMap = ARApplication.getInjector().provideColorMap();
@@ -537,6 +539,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		runOnUiThread(() ->{
 			txtProgress.setText(TimeUtils.formatTimeIntervalHourMinSec2(mills));
 			recordingWaveformView.addRecordAmp(amp, mills);
+			recordingWaveformView.addRecordMark(markEnable, mills);
+			if (markEnable > 0) {
+				markEnable = 0;
+			}
 		});
 	}
 
@@ -689,6 +695,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	@Override
 	public void askTestAdditional(String durationT) {
 		Timber.d("askTestAdditional triggered");
+		markEnable = 1;
 		AndroidUtils.showDialogYesNo(
 				MainActivity.this,
 				R.drawable.ic_bookmark_dark,
