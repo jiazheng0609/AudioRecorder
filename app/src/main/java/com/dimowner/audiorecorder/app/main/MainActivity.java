@@ -696,13 +696,6 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	public void askTestAdditional(String durationT) {
 		Timber.d("askTestAdditional triggered");
 		markEnable = 1;
-		AndroidUtils.showDialogYesNo(
-				MainActivity.this,
-				R.drawable.ic_bookmark_dark,
-				getString(R.string.test_addition),
-				getString(R.string.test_addition_2, durationT),
-				v -> presenter.stopRecording(true)
-		);
 	}
 
 	@Override
