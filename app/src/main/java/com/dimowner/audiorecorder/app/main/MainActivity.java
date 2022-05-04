@@ -729,6 +729,16 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	}
 
 	@Override
+	public void shareRecordAndMark(Record record) {
+		File fileN = new File(record.getPath());
+		List<String> share = new ArrayList<>();
+		share.add(record.getPath());
+		share.add(fileN.getParentFile().getPath() + '/' + record.getName() + ".srt");
+		share.add(fileN.getParentFile().getPath() + '/' + record.getName() + ".edl");
+		AndroidUtils.shareMultipleFiles(getApplicationContext(), share);
+	}
+
+	@Override
 	public void openFile(Record record) {
 		AndroidUtils.openAudioFile(getApplicationContext(), record.getPath(), record.getName());
 	}
@@ -823,8 +833,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 			int id = item.getItemId();
 			if (id == R.id.menu_share) {
 				presenter.onShareRecordClick();
-			} else if (id == R.id.menu_share_mark) {
-				presenter.onShareMarkClick();
+			} else if (id == R.id.menu_share_record_and_mark) {
+				showFormatMenu(v);
 			} else if (id == R.id.menu_info) {
 				presenter.onRecordInfo();
 			} else if (id == R.id.menu_rename) {
