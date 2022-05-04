@@ -210,17 +210,47 @@
 		<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
 				android:orientation="vertical">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center_horizontal"
+				android:orientation="horizontal">
 
-			<TextView
+				<ImageButton
+					android:id="@+id/btn_test_additional1"
+					android:layout_width="54dp"
+					android:layout_height="54dp"
+					android:background="?android:selectableItemBackgroundBorderless"
+					android:contentDescription="@string/test_addition"
+					android:layout_margin="@dimen/spacing_xtiny"
+					android:layout_gravity="center_vertical"
+					android:scaleType="center"
+					android:visibility="invisible"
+					android:src="@drawable/ic_bookmark"/>
+
+				<TextView
 					android:id="@+id/txt_progress"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_horizontal"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical"
 					android:textColor="@color/text_primary_light"
 					android:textSize="54sp"
 					android:textStyle="bold"
-					tools:text="00:00"/>
+					tools:text="00:00" />
+				<ImageButton
+					android:id="@+id/btn_test_additional2"
+					android:layout_width="54dp"
+					android:layout_height="54dp"
+					android:background="?android:selectableItemBackgroundBorderless"
+					android:contentDescription="@string/test_addition"
+					android:layout_margin="@dimen/spacing_xtiny"
+					android:layout_gravity="center_vertical"
+					android:scaleType="center"
+					android:visibility="invisible"
+					android:src="@drawable/ic_bookmark"/>
+			</LinearLayout>
 
 			<TextView
 					android:id="@+id/txt_name"
@@ -314,20 +344,6 @@
 					android:scaleType="center"
 					android:visibility="invisible"
 					android:src="@drawable/ic_delete_forever_36"/>
-
-			<ImageButton
-				android:id="@+id/btn_test_additional"
-				android:layout_width="42dp"
-				android:layout_height="42dp"
-				android:background="?android:selectableItemBackgroundBorderless"
-				android:contentDescription="@string/test_addition"
-				android:layout_margin="@dimen/spacing_xtiny"
-				android:layout_gravity="center"
-				android:scaleType="center"
-				android:visibility="invisible"
-				android:src="@drawable/ic_bookmark"/>
-
-
 			<ImageButton
 					android:id="@+id/btn_record"
 					android:layout_width="@dimen/bottom_pnl_btn_size"
