@@ -722,9 +722,9 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	}
 
 	@Override
-	public void shareMark(Record record) {
+	public void shareMark(Record record, String format) {
 		File fileN = new File(record.getPath());
-		String pathN = fileN.getParentFile().getPath() + '/' + record.getName() + ".srt";
+		String pathN = fileN.getParentFile().getPath() + '/' + record.getName() + "." + format;
 		AndroidUtils.shareMarkFile(getApplicationContext(), pathN, record.getName());
 	}
 
@@ -856,6 +856,25 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		inflater.inflate(R.menu.menu_more, popup.getMenu());
 		AndroidUtils.insertMenuItemIcons(v.getContext(), popup);
 		popup.show();
+	}
+
+	private void showFormatMenu(View v) {
+		PopupMenu popup2 = new PopupMenu(v.getContext(), v);
+		popup2.setOnMenuItemClickListener(item -> {
+			int id = item.getItemId();
+			if (id == R.id.menu_format_srt) {
+				presenter.onShareMarkClick("srt");
+			} else if (id == R.id.menu_format_edl) {
+				presenter.onShareMarkClick("edl");
+			} else if (id == R.id.menu_format_all) {
+				presenter.onshareRecordAndMarkClick();
+			}
+			return false;
+		});
+		MenuInflater inflater = popup2.getMenuInflater();
+		inflater.inflate(R.menu.menu_format, popup2.getMenu());
+		popup2.show();
+
 	}
 
 	public void setRecordName(final long recordId, File file, boolean showCheckbox) {
