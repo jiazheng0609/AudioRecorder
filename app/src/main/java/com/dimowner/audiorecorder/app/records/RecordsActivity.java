@@ -263,8 +263,11 @@ public class RecordsActivity extends Activity implements RecordsContract.View, V
 				AndroidUtils.shareAudioFile(getApplicationContext(), item.getPath(), item.getName(), item.getFormat());
 			} else if (menuId == R.id.menu_share_record_and_mark) {
 				File fileN = new File(item.getPath());
-				String pathN = fileN.getParentFile().getPath() + '/' + item.getName() + ".srt";
-				AndroidUtils.shareMarkFile(getApplicationContext(), pathN, item.getName());
+				List<String> share = new ArrayList<>();
+				share.add(item.getPath());
+				share.add(fileN.getParentFile().getPath() + '/' + item.getName() + ".srt");
+				share.add(fileN.getParentFile().getPath() + '/' + item.getName() + ".edl");
+				AndroidUtils.shareMultipleFiles(getApplicationContext(), share);
 			} else if (menuId == R.id.menu_info) {
 				presenter.onRecordInfo(Mapper.toRecordInfo(item));
 			} else if (menuId == R.id.menu_rename) {
