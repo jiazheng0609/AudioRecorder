@@ -640,6 +640,13 @@ public class MainPresenter implements MainContract.UserActionsListener {
 	}
 
 	@Override
+	public void onSaveMarkClick() {
+		if (view != null && record != null) {
+			view.downloadMark(record);
+		}
+	}
+
+	@Override
 	public void onDeleteClick() {
 		if (view != null && record != null) {
 			view.askDeleteRecord(record.getName());

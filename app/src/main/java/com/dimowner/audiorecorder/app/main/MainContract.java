@@ -87,6 +87,8 @@ public interface MainContract {
 
 		void downloadRecord(Record record);
 
+		void downloadMark(Record record);
+
 		void showMigratePublicStorageWarning();
 	}
 
@@ -131,6 +133,8 @@ public interface MainContract {
 		void onOpenFileClick();
 
 		void onSaveAsClick();
+
+		void onSaveMarkClick();
 
 		void onDeleteClick();
 

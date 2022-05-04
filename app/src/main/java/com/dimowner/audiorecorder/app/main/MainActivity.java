@@ -69,6 +69,7 @@ import com.dimowner.audiorecorder.util.FileUtil;
 import com.dimowner.audiorecorder.util.TimeUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -743,6 +744,19 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		}
 	}
 
+	@Override
+	public void downloadMark(Record record) {
+		File fileN = new File(record.getPath());
+		String pathN = fileN.getParentFile().getPath() + '/' + record.getName() + ".srt";
+		if (isPublicDir(record.getPath())) {
+			if (checkStoragePermissionDownload()) {
+				DownloadService.startNotification(getApplicationContext(), pathN);
+			}
+		} else {
+			DownloadService.startNotification(getApplicationContext(), pathN);
+		}
+	}
+
 	private boolean isPublicDir(String path) {
 		return path.contains(FileUtil.getAppDir().getAbsolutePath());
 	}
@@ -824,6 +838,14 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 						getString(R.string.save_as),
 						getString(R.string.record_will_be_copied_into_downloads),
 						view -> presenter.onSaveAsClick()
+				);
+			} else if (id == R.id.menu_save_mark_as) {
+				AndroidUtils.showDialogYesNo(
+						MainActivity.this,
+						R.drawable.ic_save_alt_dark,
+						getString(R.string.save_as),
+						getString(R.string.mark_will_be_copied_into_downloads),
+						view -> presenter.onSaveMarkClick()
 				);
 			} else if (id == R.id.menu_delete) {
 				presenter.onDeleteClick();

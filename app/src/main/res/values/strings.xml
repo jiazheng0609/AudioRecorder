@@ -96,6 +96,7 @@
 		<item quantity="other">Failed to move %d records</item>
 	</plurals>
 	<string name="record_will_be_copied_into_downloads">The record will be copied to the \'Downloads\' directory</string>
+	<string name="mark_will_be_copied_into_downloads">The mark will be copied to the \'Downloads\' directory</string>
 	<string name="move_record_failed">Failed to move: %s</string>
 	<string name="downloading_failed">Failed to copy: %s</string>
 	<string name="downloading_failed_file_already_exists">Failed to copy. File with name %s already exists</string>
@@ -288,4 +289,6 @@
     <string name="test_addition">標記按鈕</string>
 	<string name="test_addition_2">測試 %s</string>
     <string name="share_mark">分享標記</string>
+	<string name="share_record_and_mark">分享音檔與標記</string>
+    <string name="save_mark_as">儲存標記檔至...</string>
 </resources>
