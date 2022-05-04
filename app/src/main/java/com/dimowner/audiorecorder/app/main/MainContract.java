@@ -81,7 +81,9 @@ public interface MainContract {
 
 		void shareRecord(Record record);
 
-		void shareMark(Record record);
+		void shareMark(Record record, String format);
+
+		void shareRecordAndMark(Record record);
 
 		void openFile(Record record);
 
@@ -126,7 +128,9 @@ public interface MainContract {
 
 		void onShareRecordClick();
 
-		void onShareMarkClick();
+		void onShareMarkClick(String format);
+
+		void onshareRecordAndMarkClick();
 
 		void onRenameRecordClick();
 

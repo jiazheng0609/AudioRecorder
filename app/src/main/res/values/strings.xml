@@ -289,6 +289,6 @@
     <string name="test_addition">標記按鈕</string>
 	<string name="test_addition_2">測試 %s</string>
     <string name="share_mark">分享標記</string>
-	<string name="share_record_and_mark">分享音檔與標記</string>
+	<string name="share_record_and_mark">分享標記檔...</string>
     <string name="save_mark_as">儲存標記檔至...</string>
 </resources>

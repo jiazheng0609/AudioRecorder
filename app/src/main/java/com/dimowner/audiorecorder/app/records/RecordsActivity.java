@@ -261,7 +261,7 @@ public class RecordsActivity extends Activity implements RecordsContract.View, V
 		adapter.setOnItemOptionListener((menuId, item) -> {
 			if (menuId == R.id.menu_share) {
 				AndroidUtils.shareAudioFile(getApplicationContext(), item.getPath(), item.getName(), item.getFormat());
-			} else if (menuId == R.id.menu_share_mark) {
+			} else if (menuId == R.id.menu_share_record_and_mark) {
 				File fileN = new File(item.getPath());
 				String pathN = fileN.getParentFile().getPath() + '/' + item.getName() + ".srt";
 				AndroidUtils.shareMarkFile(getApplicationContext(), pathN, item.getName());

@@ -612,9 +612,17 @@ public class MainPresenter implements MainContract.UserActionsListener {
 		}
 	}
 
-	public void onShareMarkClick() {
+	@Override
+	public void onShareMarkClick(String format) {
 		if (view != null && record != null) {
-			view.shareMark(record);
+			view.shareMark(record, format);
+		}
+	}
+
+	@Override
+	public void onshareRecordAndMarkClick() {
+		if (view != null && record != null) {
+			view.shareRecordAndMark(record);
 		}
 	}
 
