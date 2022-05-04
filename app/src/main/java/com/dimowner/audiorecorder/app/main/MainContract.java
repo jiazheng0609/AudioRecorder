@@ -89,7 +89,9 @@ public interface MainContract {
 
 		void downloadRecord(Record record);
 
-		void downloadMark(Record record);
+		void downloadMark(Record record, String format);
+
+		void downloadRecordAndMark(Record record);
 
 		void showMigratePublicStorageWarning();
 	}
@@ -138,7 +140,9 @@ public interface MainContract {
 
 		void onSaveAsClick();
 
-		void onSaveMarkClick();
+		void onSaveMarkClick(String format);
+
+		void onSaveRecordAndMarkClick();
 
 		void onDeleteClick();
 

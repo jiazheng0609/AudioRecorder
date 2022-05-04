@@ -648,9 +648,16 @@ public class MainPresenter implements MainContract.UserActionsListener {
 	}
 
 	@Override
-	public void onSaveMarkClick() {
+	public void onSaveMarkClick(String format) {
 		if (view != null && record != null) {
-			view.downloadMark(record);
+			view.downloadMark(record, format);
+		}
+	}
+
+	@Override
+	public void onSaveRecordAndMarkClick() {
+		if (view != null && record != null) {
+			view.downloadRecordAndMark(record);
 		}
 	}
 

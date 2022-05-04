@@ -755,15 +755,53 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	}
 
 	@Override
-	public void downloadMark(Record record) {
+	public void downloadMark(Record record, String format) {
 		File fileN = new File(record.getPath());
-		String pathN = fileN.getParentFile().getPath() + '/' + record.getName() + ".srt";
+		String pathN = fileN.getParentFile().getPath() + '/' + record.getName() + "." + format;
 		if (isPublicDir(record.getPath())) {
 			if (checkStoragePermissionDownload()) {
 				DownloadService.startNotification(getApplicationContext(), pathN);
 			}
 		} else {
 			DownloadService.startNotification(getApplicationContext(), pathN);
+		}
+	}
+
+
+	public void downloadRecordAndMark(Record record) {
+		List<String> downloadPaths = new ArrayList<>();
+		File fileN = new File(record.getPath());
+		downloadPaths.add(record.getPath());
+		downloadPaths.add(fileN.getParentFile().getPath() + '/' + record.getName() + ".srt");
+		downloadPaths.add(fileN.getParentFile().getPath() + '/' + record.getName() + ".edl");
+
+		boolean hasPublicDir = false;
+		for (int i = 0; i < downloadPaths.size(); i++) {
+			if (isPublicDir(downloadPaths.get(i))) {
+				hasPublicDir = true;
+				break;
+			}
+		}
+		if (hasPublicDir) {
+			if (checkStoragePermissionDownload()) {
+				//Download record file with Service
+				DownloadService.startNotification(
+						getApplicationContext(),
+						new ArrayList<>(downloadPaths)
+				);
+			} else {
+				showError(getResources().getQuantityString(
+						R.plurals.downloading_failed_count,
+						downloadPaths.size(),
+						downloadPaths.size())
+				);
+			}
+		} else {
+			//Download record file with Service
+			DownloadService.startNotification(
+					getApplicationContext(),
+					new ArrayList<>(downloadPaths)
+			);
 		}
 	}
 
@@ -850,13 +888,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 						view -> presenter.onSaveAsClick()
 				);
 			} else if (id == R.id.menu_save_mark_as) {
-				AndroidUtils.showDialogYesNo(
-						MainActivity.this,
-						R.drawable.ic_save_alt_dark,
-						getString(R.string.save_as),
-						getString(R.string.mark_will_be_copied_into_downloads),
-						view -> presenter.onSaveMarkClick()
-				);
+				showDownloadFormatMenu(v);
 			} else if (id == R.id.menu_delete) {
 				presenter.onDeleteClick();
 			}
@@ -878,6 +910,44 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 				presenter.onShareMarkClick("edl");
 			} else if (id == R.id.menu_format_all) {
 				presenter.onshareRecordAndMarkClick();
+			}
+			return false;
+		});
+		MenuInflater inflater = popup2.getMenuInflater();
+		inflater.inflate(R.menu.menu_format, popup2.getMenu());
+		popup2.show();
+
+	}
+
+	private void showDownloadFormatMenu(View v) {
+		PopupMenu popup2 = new PopupMenu(v.getContext(), v);
+		popup2.setOnMenuItemClickListener(item -> {
+			int id = item.getItemId();
+			if (id == R.id.menu_format_srt) {
+				AndroidUtils.showDialogYesNo(
+						MainActivity.this,
+						R.drawable.ic_save_alt_dark,
+						getString(R.string.save_as),
+						getString(R.string.mark_will_be_copied_into_downloads),
+						view -> presenter.onSaveMarkClick("srt")
+				);
+			} else if (id == R.id.menu_format_edl) {
+				AndroidUtils.showDialogYesNo(
+						MainActivity.this,
+						R.drawable.ic_save_alt_dark,
+						getString(R.string.save_as),
+						getString(R.string.mark_will_be_copied_into_downloads),
+						view -> presenter.onSaveMarkClick("edl")
+				);
+			} else if (id == R.id.menu_format_all) {
+				AndroidUtils.showDialogYesNo(
+						MainActivity.this,
+						R.drawable.ic_save_alt_dark,
+						getString(R.string.save_as),
+						getString(R.string.mark_will_be_copied_into_downloads),
+						view -> presenter.onSaveRecordAndMarkClick()
+				);
+
 			}
 			return false;
 		});
