@@ -289,7 +289,28 @@ public class RecordsActivity extends Activity implements RecordsContract.View, V
 							item.getPath()
 					);
 				}
-			} else if (menuId == R.id.menu_delete) {
+			} else if (menuId == R.id.menu_save_mark_as) {
+				File fileN = new File(item.getPath());
+				String pathN = fileN.getParentFile().getPath() + '/' + item.getName() + ".srt";
+				if (isPublicDir(item.getPath())) {
+					if (checkStoragePermissionDownload()) {
+						//Download record file with Service
+						DownloadService.startNotification(
+								getApplicationContext(),
+								pathN
+						);
+					} else {
+						downloadRecords.add(pathN);
+					}
+				} else {
+					//Download record file with Service
+					DownloadService.startNotification(
+							getApplicationContext(),
+							pathN
+					);
+				}
+			}
+			else if (menuId == R.id.menu_delete) {
 				AndroidUtils.showDialogYesNo(
 						RecordsActivity.this,
 						R.drawable.ic_delete_forever_dark,
