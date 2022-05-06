@@ -135,6 +135,14 @@ public class TimeUtils {
 		return String.format(Locale.getDefault(), "%02d:%02d:%02d,%03d", hour, min, sec, m);
 	}
 
+	public static String formatSMPTETime(long mills, int fps) {
+		long hour = mills / (60 * 60 * 1000);
+		long min = mills / (60 * 1000) % 60;
+		long sec = (mills / 1000) % 60;
+		long frames = (mills % 1000) * fps / 1000;
+		return String.format(Locale.getDefault(), "%02d:%02d:%02d:%02d", hour, min, sec, frames);
+	}
+
 //	public static String formatDateSmart(long time, Context ctx) {
 //		if (time <= 0) {
 //			return "Wrong date!";
