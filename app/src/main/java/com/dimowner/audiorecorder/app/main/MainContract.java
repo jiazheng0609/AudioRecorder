@@ -146,7 +146,7 @@ public interface MainContract {
 
 		void onDeleteClick();
 
-		void onMarkClick(); // TEST additional
+		void onMarkClick(String msg); // TEST additional
 
 		void startMark(Context context, String name);
 

@@ -669,12 +669,12 @@ public class MainPresenter implements MainContract.UserActionsListener {
 	}
 
 	@Override
-	public void onMarkClick() {
+	public void onMarkClick(String msg) {
 		Timber.d("onMarkClick triggered1"+view+record);
 
 		if (view != null) {
 			Timber.d("onMarkClick triggered2");
-			mark.addMarkPoint(appRecorder.getRecordingDuration(), "mark1");
+			mark.addMarkPoint(appRecorder.getRecordingDuration(), msg);
 			view.askTestAdditional(TimeUtils.formatSrtTime(appRecorder.getRecordingDuration()));
 		}
 	}

@@ -363,10 +363,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 			presenter.onRenameRecordClick();
 		} else if (id ==  R.id.btn_test_additional1) {
 			Timber.d("Test Button OnClick");
-			presenter.onMarkClick();
+			presenter.onMarkClick("Blue");
 		} else if (id ==  R.id.btn_test_additional2) {
 			Timber.d("Test Button OnClick");
-			presenter.onMarkClick();
+			presenter.onMarkClick("Red");
 		}
 	}
 

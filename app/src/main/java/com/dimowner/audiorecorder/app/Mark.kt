@@ -17,6 +17,7 @@ class Mark {
     private var counter: Int = 0
 
     private var timecodes: MutableList<Long> = mutableListOf()
+    private var msgs: MutableList<String> = mutableListOf()
 
     fun getInstance(context: Context) {
 
@@ -39,26 +40,25 @@ class Mark {
     fun addMarkPoint(timeMills: Long, msg: String) {
         counter = counter + 1
         timecodes.add(timeMills)
+        msgs.add(msg)
     }
 
     fun finishEdlMark(name: String) {
         contentOut = "TITLE: " + name + '\n' + "FCM: NON-DROP FRAME\n\n"
-        counter = 1
-        for (timeMills in timecodes) {
-            var timeStart = TimeUtils.formatSMPTETime(timeMills, FPS)
-            var timeEnd = TimeUtils.formatSMPTETime(timeMills+1/FPS*1000, FPS)
-            contentOut = contentOut + counter.toString() + " 001 V C " + timeStart + " " + timeEnd + " "+ timeStart + " " + timeEnd + '\n' + "mark1" + " |C:ResolveColorBlue |M: |D:" + FPS.toString() + "\n\n"
-            counter = counter + 1
+
+        for (i in 0..(counter-1)) {
+            var timeStart = TimeUtils.formatSMPTETime(timecodes[i], FPS)
+            var timeEnd = TimeUtils.formatSMPTETime(timecodes[i]+1*1000/FPS, FPS)
+            contentOut = contentOut + (i+1).toString() + " 001 V C " + timeStart + " " + timeEnd + " "+ timeStart + " " + timeEnd + '\n' + "mark1" + " |C:ResolveColor" + msgs[i] +" |M: |D:" + FPS.toString() + "\n\n"
         }
     }
 
     fun finishSrtMark(name: String) {
-        counter = 1
-        for (timeMills in timecodes) {
-            var timeStart = TimeUtils.formatSrtTime(timeMills)
-            var timeEnd = TimeUtils.formatSrtTime(timeMills+1)
-            contentOut = contentOut + counter.toString() + '\n' + timeStart + " --> " + timeEnd  + '\n' + "mark1" + "\n\n"
-            counter = counter + 1
+
+        for (i in 0..(counter-1)) {
+            var timeStart = TimeUtils.formatSrtTime(timecodes[i])
+            var timeEnd = TimeUtils.formatSrtTime(timecodes[i]+1)
+            contentOut = contentOut + (i+1).toString() + '\n' + timeStart + " --> " + timeEnd  + '\n' + msgs[i] + "\n\n"
         }
 
     }
@@ -76,6 +76,7 @@ class Mark {
             renameMark(name)
 
         _name = ""
+        counter = 0
     }
 
     fun renameMark(newName: String) {
