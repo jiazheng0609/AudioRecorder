@@ -39,6 +39,7 @@ public class SetupPresenter implements SetupContract.UserActionsListener {
 		if (view != null) {
 			view.updateRecordingInfo(prefs.getSettingRecordingFormat());
 			view.showChannelCount(prefs.getSettingChannelCount());
+			view.showFPS(prefs.getSettingFPS());
 			String recordingFormatKey = prefs.getSettingRecordingFormat();
 			view.showRecordingFormat(recordingFormatKey);
 			updateRecordingFormat(recordingFormatKey);
@@ -143,6 +144,11 @@ public class SetupPresenter implements SetupContract.UserActionsListener {
 	@Override
 	public void setSettingNamingFormat(String namingKey) {
 		prefs.setSettingNamingFormat(namingKey);
+	}
+
+	@Override
+	public void setSettingFPS(String fpsKey) {
+		prefs.setSettingFPS(fpsKey);
 	}
 
 	@Override

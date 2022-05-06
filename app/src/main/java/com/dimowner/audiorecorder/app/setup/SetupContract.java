@@ -30,6 +30,8 @@ public class SetupContract {
 
 		void showNamingFormat(String namingKey);
 
+		void showFPS(String fpsKey);
+
 		void showRecordingFormat(String formatKey);
 
 		void showBitrateSelector();
@@ -56,6 +58,8 @@ public class SetupContract {
 		void setSettingThemeColor(String colorKey);
 
 		void setSettingNamingFormat(String namingKey);
+
+		void setSettingFPS(String fpsKey);
 
 		void setSettingRecordingFormat(String formatKey);
 

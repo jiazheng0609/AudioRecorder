@@ -307,6 +307,11 @@
 					android:textSize="@dimen/text_normal" />
 		</LinearLayout>
 
+
+		<com.dimowner.audiorecorder.app.widget.SettingView
+			android:id="@+id/setting_fps"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
 		<com.dimowner.audiorecorder.app.widget.SettingView
 				android:id="@+id/setting_recording_format"
 				android:layout_width="match_parent"

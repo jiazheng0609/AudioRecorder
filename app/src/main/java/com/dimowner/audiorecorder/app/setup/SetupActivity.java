@@ -45,6 +45,7 @@ public class SetupActivity extends Activity implements SetupContract.View, View.
 
 	private Spinner nameFormatSelector;
 
+	private SettingView fpsSetting;
 	private SettingView formatSetting;
 	private SettingView sampleRateSetting;
 	private SettingView bitrateSetting;
@@ -88,6 +89,19 @@ public class SetupActivity extends Activity implements SetupContract.View, View.
 //		ViewGroup.LayoutParams params = space.getLayoutParams();
 //		params.height = AndroidUtils.getNavigationBarHeight(getApplicationContext());
 //		space.setLayoutParams(params);
+
+		fpsSetting = findViewById(R.id.setting_fps);
+		final String [] fpss = getResources().getStringArray(R.array.fps2);
+		final String [] fpsKeys = new String[] {
+				AppConstants.FPS_25,
+				AppConstants.FPS_30,
+				AppConstants.FPS_60,
+				AppConstants.FPS_120
+		};
+		fpsSetting.setData(fpss, fpsKeys);
+		fpsSetting.setOnChipCheckListener((key, name, checked) -> presenter.setSettingFPS(key));
+		fpsSetting.setTitle(R.string.fps_setting);
+		fpsSetting.setOnInfoClickListener(v -> AndroidUtils.showInfoDialog(SetupActivity.this, R.string.info_fps));
 
 		formatSetting = findViewById(R.id.setting_recording_format);
 		final String[] formats = getResources().getStringArray(R.array.formats2);
@@ -263,6 +277,11 @@ public class SetupActivity extends Activity implements SetupContract.View, View.
 	@Override
 	public void showNamingFormat(String namingKey) {
 		nameFormatSelector.setSelection(SettingsMapper.namingFormatToPosition(namingKey));
+	}
+
+	@Override
+	public void showFPS(String fpsKey) {
+		fpsSetting.setSelected(fpsKey);
 	}
 
 	@Override

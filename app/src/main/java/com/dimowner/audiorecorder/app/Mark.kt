@@ -2,11 +2,12 @@ package com.dimowner.audiorecorder.app
 
 import android.content.Context
 import android.util.Log
+import com.dimowner.audiorecorder.ARApplication
+import com.dimowner.audiorecorder.AppConstants
+import com.dimowner.audiorecorder.data.Prefs
 import com.dimowner.audiorecorder.util.FileUtil
 import com.dimowner.audiorecorder.util.TimeUtils
 import java.io.File
-
-const val FPS = 30
 
 class Mark {
 
@@ -18,6 +19,9 @@ class Mark {
 
     private var timecodes: MutableList<Long> = mutableListOf()
     private var msgs: MutableList<String> = mutableListOf()
+
+    private lateinit var prefs: Prefs
+    private var FPS = 30
 
     fun getInstance(context: Context) {
 
@@ -35,6 +39,7 @@ class Mark {
         fileEdl = FileUtil.createFile(FileUtil.getPrivateRecordsDir(context), filenameExt)
         Log.d("jiazheng.mark", "mark start called " + path)
 
+        prefs = ARApplication.getInjector().providePrefs()
 
     }
     fun addMarkPoint(timeMills: Long, msg: String) {
@@ -45,6 +50,13 @@ class Mark {
 
     fun finishEdlMark(name: String) {
         contentOut = "TITLE: " + name + '\n' + "FCM: NON-DROP FRAME\n\n"
+
+        when (prefs.getSettingFPS()) {
+            AppConstants.FPS_25 -> FPS = 25
+            AppConstants.FPS_30 -> FPS = 30
+            AppConstants.FPS_60 -> FPS = 60
+            AppConstants.FPS_120 -> FPS = 120
+        }
 
         for (i in 0..(counter-1)) {
             var timeStart = TimeUtils.formatSMPTETime(timecodes[i], FPS)

@@ -39,6 +39,7 @@ public class PrefsImpl implements Prefs {
 	private static final String PREF_KEY_RECORD_COUNTER = "record_counter";
 	private static final String PREF_KEY_THEME_COLORMAP_POSITION = "theme_color";
 	private static final String PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
+	private static final String PREF_KEY_FPS = "pref_fps";
 	private static final String PREF_KEY_FORMAT = "pref_format";
 	private static final String PREF_KEY_BITRATE = "pref_bitrate";
 	private static final String PREF_KEY_SAMPLE_RATE = "pref_sample_rate";
@@ -51,6 +52,7 @@ public class PrefsImpl implements Prefs {
 	private static final String PREF_KEY_RECORD_CHANNEL_COUNT = "record_channel_count";
 
 	private static final String PREF_KEY_SETTING_THEME_COLOR = "setting_theme_color";
+	private static final String PREF_KEY_SETTING_FPS = "setting_fps";
 	private static final String PREF_KEY_SETTING_RECORDING_FORMAT = "setting_recording_format";
 	private static final String PREF_KEY_SETTING_BITRATE = "setting_bitrate";
 	private static final String PREF_KEY_SETTING_SAMPLE_RATE = "setting_sample_rate";
@@ -198,6 +200,10 @@ public class PrefsImpl implements Prefs {
 		return sharedPreferences.getBoolean(PREF_KEY_KEEP_SCREEN_ON, false);
 	}
 
+	public int getFPS() {
+		return sharedPreferences.getInt(PREF_KEY_FPS, AppConstants.FPS_N_30);
+	}
+
 	public int getFormat() {
 		return sharedPreferences.getInt(PREF_KEY_FORMAT, AppConstants.RECORDING_FORMAT_M4A);
 	}
@@ -235,6 +241,7 @@ public class PrefsImpl implements Prefs {
 	public void migrateSettings() {
 		int color = getThemeColor();
 		int nameFormat = getNamingFormat();
+		int fps = getFPS();
 		int recordingFormat = getFormat();
 		int sampleRate = getSampleRate();
 		int bitrate = getBitrate();
@@ -277,6 +284,15 @@ public class PrefsImpl implements Prefs {
 				colorKey = AppConstants.DEFAULT_THEME_COLOR;
 		}
 
+		String fpsKey;
+		switch (fps) {
+			case AppConstants.FPS_N_30:
+				fpsKey =  AppConstants.FPS_30;
+				break;
+			default:
+				fpsKey = AppConstants.DEFAULT_FPS;
+		}
+
 		String recordingFormatKey;
 		switch (recordingFormat) {
 			case AppConstants.RECORDING_FORMAT_WAV:
@@ -303,6 +319,7 @@ public class PrefsImpl implements Prefs {
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.putString(PREF_KEY_SETTING_THEME_COLOR, colorKey);
 		editor.putString(PREF_KEY_SETTING_NAMING_FORMAT, namingFormatKey);
+		editor.putString(PREF_KEY_SETTING_FPS, fpsKey);
 		editor.putString(PREF_KEY_SETTING_RECORDING_FORMAT, recordingFormatKey);
 		editor.putInt(PREF_KEY_SETTING_SAMPLE_RATE, sampleRate);
 		editor.putInt(PREF_KEY_SETTING_BITRATE, bitrate);
@@ -345,6 +362,18 @@ public class PrefsImpl implements Prefs {
 	@Override
 	public String getSettingNamingFormat() {
 		return sharedPreferences.getString(PREF_KEY_SETTING_NAMING_FORMAT, AppConstants.DEFAULT_NAME_FORMAT);
+	}
+
+	@Override
+	public void setSettingFPS(String fpsKey) {
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putString(PREF_KEY_SETTING_FPS, fpsKey);
+		editor.apply();
+	}
+
+	@Override
+	public String getSettingFPS() {
+		return sharedPreferences.getString(PREF_KEY_SETTING_FPS, AppConstants.DEFAULT_FPS);
 	}
 
 	@Override
@@ -400,6 +429,7 @@ public class PrefsImpl implements Prefs {
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 //		editor.putString(PREF_KEY_SETTING_THEME_COLOR, AppConstants.DEFAULT_THEME_COLOR);
 //		editor.putString(PREF_KEY_SETTING_NAMING_FORMAT, AppConstants.DEFAULT_NAME_FORMAT);
+		editor.putString(PREF_KEY_SETTING_FPS, AppConstants.DEFAULT_FPS);
 		editor.putString(PREF_KEY_SETTING_RECORDING_FORMAT, AppConstants.DEFAULT_RECORDING_FORMAT);
 		editor.putInt(PREF_KEY_SETTING_SAMPLE_RATE, AppConstants.DEFAULT_RECORD_SAMPLE_RATE);
 		editor.putInt(PREF_KEY_SETTING_BITRATE, AppConstants.DEFAULT_RECORD_ENCODING_BITRATE);

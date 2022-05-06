@@ -60,6 +60,9 @@ public interface Prefs {
 	void setSettingNamingFormat(String nameKay);
 	String getSettingNamingFormat();
 
+	void setSettingFPS(String fpsKey);
+	String getSettingFPS();
+
 	void setSettingRecordingFormat(String formatKey);
 	String getSettingRecordingFormat();
 

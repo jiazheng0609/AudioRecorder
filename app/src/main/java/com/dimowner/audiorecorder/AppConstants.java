@@ -44,6 +44,11 @@ public class AppConstants {
 
 	public static final String[] SUPPORTED_EXT = new String[]{"mp3", "wav", "3gpp", "3gp", "amr", "aac", "m4a", "mp4", "ogg", "flac"};
 
+	public static final String FPS_25 = "25";
+	public static final String FPS_30 = "30";
+	public static final String FPS_60 = "60";
+	public static final String FPS_120 = "120";
+
 	public static final String FORMAT_M4A = "m4a";
 	public static final String FORMAT_WAV = "wav";
 	public static final String FORMAT_3GP = "3gp";
@@ -65,6 +70,8 @@ public class AppConstants {
 
 	public static final int NAMING_COUNTED = 0;
 	public static final int NAMING_DATE = 1;
+
+	public static final int FPS_N_30 = 1;
 
 	public static final int RECORDING_FORMAT_M4A = 0;
 	public static final int RECORDING_FORMAT_WAV = 1;
@@ -128,6 +135,7 @@ public class AppConstants {
 	public final static int RECORD_MAX_DURATION = 14400000; // 240 min 4 hours
 
 	public static final String DEFAULT_THEME_COLOR = THEME_BLUE_GREY;
+	public static final String DEFAULT_FPS = FPS_30;
 	public static final String DEFAULT_RECORDING_FORMAT = FORMAT_M4A;
 	public static final String DEFAULT_NAME_FORMAT = NAME_FORMAT_RECORD;
 	public static final int DEFAULT_RECORD_SAMPLE_RATE = RECORD_SAMPLE_RATE_44100;

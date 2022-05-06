@@ -76,6 +76,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 
 	private Spinner nameFormatSelector;
 
+	private SettingView fpsSetting;
 	private SettingView formatSetting;
 	private SettingView sampleRateSetting;
 	private SettingView bitrateSetting;
@@ -97,6 +98,8 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 		}
 	};
 
+	private String[] fpss;
+	private String[] fpsKeys;
 	private String[] formats;
 	private String[] formatsKeys;
 	private String[] sampleRates;
@@ -157,6 +160,19 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 
 		swKeepScreenOn.setOnCheckedChangeListener((btn, isChecked) -> presenter.keepScreenOn(isChecked));
 		swAskToRename.setOnCheckedChangeListener((btn, isChecked) -> presenter.askToRenameAfterRecordingStop(isChecked));
+
+		fpsSetting = findViewById(R.id.setting_fps);
+		fpss = getResources().getStringArray(R.array.fps2);
+		fpsKeys = new String[] {
+				AppConstants.FPS_25,
+				AppConstants.FPS_30,
+				AppConstants.FPS_60,
+				AppConstants.FPS_120
+		};
+		fpsSetting.setData(fpss, fpsKeys);
+		fpsSetting.setOnChipCheckListener((key, name, checked) -> presenter.setSettingFPS(key));
+		fpsSetting.setTitle(R.string.fps_setting);
+		fpsSetting.setOnInfoClickListener(v -> AndroidUtils.showInfoDialog(SettingsActivity.this, R.string.info_fps));
 
 		formatSetting = findViewById(R.id.setting_recording_format);
 		formats = getResources().getStringArray(R.array.formats2);
@@ -444,6 +460,11 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 	@Override
 	public void showRecordingSampleRate(int rate) {
 		sampleRateSetting.setSelected(SettingsMapper.sampleRateToKey(rate));
+	}
+
+	@Override
+	public void showFPS(String fpsKey) {
+		fpsSetting.setSelected(fpsKey);
 	}
 
 	@Override
