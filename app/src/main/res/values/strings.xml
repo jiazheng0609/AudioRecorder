@@ -201,7 +201,7 @@
 	<string name="info_sample_rate_32k"><b>32kHz</b> is a bit better than 22kHz.</string>
 	<string name="info_sample_rate_44k"><b>44,1kHz</b> is the sampling rate of Audio CDs. <b>(recommended)</b></string>
 	<string name="info_sample_rate_48k"><b>48kHz</b> is the sample rate used for DVDs.</string>
-	<string name="fps_setting">錄影 FPS:</string>
+	<string name="fps_setting">影片 FPS:</string>
 	<string name="recording_format">Recording format:</string>
 	<string name="bitrate">Bitrate:</string>
 	<string name="channels">Channel count:</string>
