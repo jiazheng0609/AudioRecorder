@@ -254,6 +254,20 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 		popup.show();
 	}
 
+	/*private void showFormatMenu(View v, final int pos) {
+		PopupMenu popup2 = new PopupMenu(v.getContext(), v);
+		popup2.setOnMenuItemClickListener(item -> {
+			if (onItemOptionListener != null && data.size() > pos) {
+				onItemOptionListener.onItemOptionSelected(item.getItemId(), data.get(pos));
+			}
+			return false;
+		});
+		MenuInflater inflater = popup2.getMenuInflater();
+		inflater.inflate(R.menu.menu_format, popup2.getMenu());
+		AndroidUtils.insertMenuItemIcons(v.getContext(), popup2);
+		popup2.show();
+	}*/
+
 	void setActiveItem(int activeItem) {
 		int prev = this.activeItem;
 		this.activeItem = activeItem;

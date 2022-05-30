@@ -365,6 +365,39 @@ class WaveformViewNew @JvmOverloads constructor(
 		}
 	}
 
+	private fun drawMark(canvas: Canvas) {
+		val subStepPx = millsToPx(gridStepMills / 2)
+		val halfWidthMills = pxToMill(viewWidthPx / 2)
+		val gridEndMills = durationMills + halfWidthMills.toInt() + gridStepMills
+		val halfScreenStepCount = (halfWidthMills/gridStepMills).toInt()
+
+		for (indexMills in -halfScreenStepCount*gridStepMills until gridEndMills step gridStepMills) {
+			val sampleIndexPx = millsToPx(indexMills)
+			val xPos = (waveformShiftPx + sampleIndexPx)
+			if (xPos >= -gridStepMills && xPos <= viewWidthPx + gridStepMills) { // Draw only visible grid items +1
+				//Draw grid lines
+				//Draw main grid line
+				canvas.drawLine(xPos, textIndent, xPos, height - textIndent, gridPaint)
+				val xSubPos = xPos + subStepPx
+				//Draw grid top sub-line
+				canvas.drawLine(xSubPos, textIndent, xSubPos, GIRD_SUBLINE_HEIGHT + textIndent, gridPaint)
+				//Draw grid bottom sub-line
+				canvas.drawLine(xSubPos, height - GIRD_SUBLINE_HEIGHT - textIndent, xSubPos, height - textIndent, gridPaint)
+
+				if (showTimeline) {
+					//Draw timeline texts
+					if (indexMills >= 0) {
+						val text = TimeUtils.formatTimeIntervalHourMin(indexMills)
+						//Bottom timeline text
+						canvas.drawText(text, xPos, height - PADD, textPaint)
+						//Top timeline text
+						canvas.drawText(text, xPos, textHeight, textPaint)
+					}
+				}
+			}
+		}
+	}
+
 	private fun drawWaveForm(canvas: Canvas) {
 		if (waveformData.isNotEmpty()) {
 			clearDrawLines()

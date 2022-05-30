@@ -61,7 +61,7 @@ class Mark {
         for (i in 0..(counter-1)) {
             var timeStart = TimeUtils.formatSMPTETime(timecodes[i], FPS)
             var timeEnd = TimeUtils.formatSMPTETime(timecodes[i]+1*1000/FPS, FPS)
-            contentOut = contentOut + (i+1).toString() + " 001 V C " + timeStart + " " + timeEnd + " "+ timeStart + " " + timeEnd + '\n' + "mark1" + " |C:ResolveColor" + msgs[i] +" |M: |D:" + FPS.toString() + "\n\n"
+            contentOut = contentOut + String.format("%03d", i + 1) + " 001 V     C        " + timeStart + " " + timeEnd + " "+ timeStart + " " + timeEnd + '\n' + " |C:ResolveColor" + msgs[i] +" |M: |D:" + FPS.toString() + "\n\n"
         }
     }
 
