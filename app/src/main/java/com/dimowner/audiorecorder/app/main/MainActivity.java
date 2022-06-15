@@ -366,7 +366,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 			presenter.onMarkClick("Blue");
 		} else if (id ==  R.id.btn_test_additional2) {
 			Timber.d("Test Button OnClick");
-			presenter.onMarkClick("Red");
+			presenter.onMarkClick("Green");
 		}
 	}
 

@@ -222,13 +222,13 @@
 					android:id="@+id/btn_test_additional1"
 					android:layout_width="100dp"
 					android:layout_height="100dp"
+					android:layout_gravity="center_vertical"
+					android:layout_margin="@dimen/spacing_xtiny"
 					android:background="?android:selectableItemBackgroundBorderless"
 					android:contentDescription="@string/test_addition"
-					android:layout_margin="@dimen/spacing_xtiny"
-					android:layout_gravity="center_vertical"
-					android:scaleType="center"
-					android:visibility="invisible"
-					android:src="@drawable/ic_bookmark_blue"/>
+					android:scaleType="fitCenter"
+					android:src="@drawable/ic_bookmark_a"
+					android:visibility="invisible" />
 
 				<TextView
 					android:id="@+id/txt_progress"
@@ -239,17 +239,18 @@
 					android:textSize="54sp"
 					android:textStyle="bold"
 					tools:text="00:00" />
+
 				<ImageButton
 					android:id="@+id/btn_test_additional2"
 					android:layout_width="100dp"
 					android:layout_height="100dp"
+					android:layout_gravity="center_vertical"
+					android:layout_margin="@dimen/spacing_xtiny"
 					android:background="?android:selectableItemBackgroundBorderless"
 					android:contentDescription="@string/test_addition"
-					android:layout_margin="@dimen/spacing_xtiny"
-					android:layout_gravity="center_vertical"
-					android:scaleType="center"
-					android:visibility="invisible"
-					android:src="@drawable/ic_bookmark_red"/>
+					android:scaleType="fitCenter"
+					android:src="@drawable/ic_bookmark_b"
+					android:visibility="invisible" />
 			</LinearLayout>
 
 			<TextView
@@ -366,7 +367,7 @@
 					android:contentDescription="@null"
 					android:padding="@dimen/spacing_normal"
 					android:scaleType="center"
-					android:src="@drawable/ic_stop"
+					android:src="@drawable/ic_check_36"
 					android:visibility="invisible" />
 
 		</LinearLayout>
