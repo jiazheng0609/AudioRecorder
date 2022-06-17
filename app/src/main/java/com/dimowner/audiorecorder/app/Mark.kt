@@ -18,6 +18,7 @@ class Mark {
     private var counter: Int = 0
 
     private var timecodes: MutableList<Long> = mutableListOf()
+    private var colors: MutableList<String> = mutableListOf()
     private var msgs: MutableList<String> = mutableListOf()
 
     private lateinit var prefs: Prefs
@@ -42,13 +43,16 @@ class Mark {
         prefs = ARApplication.getInjector().providePrefs()
 
     }
-    fun addMarkPoint(timeMills: Long, msg: String) {
+    fun addMarkPoint(timeMills: Long, color: String, msg: String) {
         counter = counter + 1
         timecodes.add(timeMills)
+        colors.add(color)
         msgs.add(msg)
     }
 
     fun finishEdlMark(name: String) {
+        var timeStart: String
+        var timeEnd: String
         contentOut = "TITLE: " + name + '\n' + "FCM: NON-DROP FRAME\n\n"
 
         when (prefs.getSettingFPS()) {
@@ -59,17 +63,18 @@ class Mark {
         }
 
         for (i in 0..(counter-1)) {
-            var timeStart = TimeUtils.formatSMPTETime(timecodes[i], FPS)
-            var timeEnd = TimeUtils.formatSMPTETime(timecodes[i]+1*1000/FPS, FPS)
-            contentOut = contentOut + String.format("%03d", i + 1) + " 001 V     C        " + timeStart + " " + timeEnd + " "+ timeStart + " " + timeEnd + '\n' + " |C:ResolveColor" + msgs[i] +" |M: |D:" + FPS.toString() + "\n\n"
+            timeStart = TimeUtils.formatSMPTETime(timecodes[i], FPS)
+            timeEnd = TimeUtils.formatSMPTETime(timecodes[i]+1*1000/FPS, FPS)
+            contentOut = contentOut + String.format("%03d", i + 1) + " 001 V     C        " + timeStart + " " + timeEnd + " "+ timeStart + " " + timeEnd + '\n' + msgs[i] + " |C:ResolveColor" + colors[i] +" |M: |D:" + FPS.toString() + "\n\n"
         }
     }
 
     fun finishSrtMark(name: String) {
-
+        var timeStart: String
+        var timeEnd: String
         for (i in 0..(counter-1)) {
-            var timeStart = TimeUtils.formatSrtTime(timecodes[i])
-            var timeEnd = TimeUtils.formatSrtTime(timecodes[i]+1)
+            timeStart = TimeUtils.formatSrtTime(timecodes[i])
+            timeEnd = TimeUtils.formatSrtTime(timecodes[i]+1)
             contentOut = contentOut + (i+1).toString() + '\n' + timeStart + " --> " + timeEnd  + '\n' + msgs[i] + "\n\n"
         }
 
