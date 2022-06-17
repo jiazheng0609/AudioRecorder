@@ -69,7 +69,7 @@ public interface MainContract {
 
 		void askDeleteRecord(String name);
 
-		void askTestAdditional(String durationT);
+		void askTestAdditional(String color);
 
 		void askDeleteRecordForever();
 

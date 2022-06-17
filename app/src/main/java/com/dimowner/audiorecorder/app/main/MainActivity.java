@@ -159,6 +159,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	}
 
 	private int markEnable = 0;
+	private String markColor = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -559,9 +560,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		runOnUiThread(() ->{
 			txtProgress.setText(TimeUtils.formatTimeIntervalHourMinSec2(mills));
 			recordingWaveformView.addRecordAmp(amp, mills);
-			recordingWaveformView.addRecordMark(markEnable, mills);
+			recordingWaveformView.addRecordMark(markEnable, mills, markColor);
 			if (markEnable > 0) {
 				markEnable = 0;
+				markColor = "";
 			}
 		});
 	}
@@ -713,9 +715,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	}
 
 	@Override
-	public void askTestAdditional(String durationT) {
+	public void askTestAdditional(String color) {
 		Timber.d("askTestAdditional triggered");
 		markEnable = 1;
+		markColor = color;
 	}
 
 	@Override

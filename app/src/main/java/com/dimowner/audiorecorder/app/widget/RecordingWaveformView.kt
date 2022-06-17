@@ -57,6 +57,7 @@ class RecordingWaveformView @JvmOverloads constructor(
 
 	private val recordingData: MutableList<Int> = LinkedList<Int>()
 	private val markData: MutableList<Int> = LinkedList<Int>()
+	private val markColorData: MutableList<String> = LinkedList<String>()
 	lateinit var drawLinesArray: FloatArray
 	private var totalRecordingSize: Int = 0
 
@@ -110,10 +111,12 @@ class RecordingWaveformView @JvmOverloads constructor(
 		invalidate()
 	}
 
-	fun addRecordMark(amp: Int, mills: Long) {
+	fun addRecordMark(amp: Int, mills: Long, color: String) {
 		markData.add(amp)
+		markColorData.add(color)
 		if (markData.size > pxToSample(viewWidthPx / 2)) {
 			markData.removeAt(0)
+			markColorData.removeAt(0)
 		}
 	}
 
@@ -277,10 +280,16 @@ class RecordingWaveformView @JvmOverloads constructor(
 					drawLinesArray[step + 1] = textIndent
 					drawLinesArray[step + 2] = xPos
 					drawLinesArray[step + 3] = height - textIndent
-					step += 4
+					step = 0
+
+					when (markColorData[markColorData.size - 1 - sampleIndex]) {
+						"Blue" -> markPaint.color = ContextCompat.getColor(context, R.color.md_blue_300)
+						"Green" -> markPaint.color = ContextCompat.getColor(context, R.color.md_green_500)
+						else -> markPaint.color = ContextCompat.getColor(context, R.color.md_yellow_A700)
+					}
+					canvas.drawLines(drawLinesArray, 0, drawLinesArray.size, markPaint)
 				}
 			}
-			canvas.drawLines(drawLinesArray, 0, drawLinesArray.size, markPaint)
 		}
 	}
 

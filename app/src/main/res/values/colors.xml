@@ -44,6 +44,7 @@
 	<color name="md_deep_purple_700">#512da8</color>
 	<color name="md_deep_purple_700x">#3E2283</color>
 	<!--blue-->
+	<color name="md_blue_300">#64B5F6</color>
 	<color name="md_blue_500">#5677fc</color>
 	<color name="md_blue_700">#455ede</color>
 	<color name="md_blue_700x">#3448AE</color>

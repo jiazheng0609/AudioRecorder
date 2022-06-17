@@ -675,7 +675,7 @@ public class MainPresenter implements MainContract.UserActionsListener {
 		if (view != null) {
 			Timber.d("onMarkClick triggered2");
 			mark.addMarkPoint(appRecorder.getRecordingDuration(), color, msg);
-			view.askTestAdditional(TimeUtils.formatSrtTime(appRecorder.getRecordingDuration()));
+			view.askTestAdditional(color);
 		}
 	}
 
