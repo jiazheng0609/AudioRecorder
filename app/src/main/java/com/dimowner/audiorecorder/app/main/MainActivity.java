@@ -29,6 +29,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -364,9 +365,11 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		} else if (id ==  R.id.btn_test_additional1) {
 			Timber.d("Mark Button A OnClick");
 			presenter.onMarkClick("Blue", "A");
+			view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
 		} else if (id ==  R.id.btn_test_additional2) {
 			Timber.d("Mark Button B OnClick");
 			presenter.onMarkClick("Green", "B");
+			view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
 		}
 	}
 
