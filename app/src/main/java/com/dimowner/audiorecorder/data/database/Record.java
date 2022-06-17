@@ -42,12 +42,13 @@ public class Record {
 	private boolean bookmark;
 	private final boolean waveformProcessed;
 	private final int[] amps;
+	private final int[] marks;
 	private final byte[] data;
 	//TODO: Remove not needed data clusters.
 
 	public Record(int id, String name, long duration, long created, long added, long removed, String path,
 					  String format, long size, int sampleRate, int channelCount, int bitrate,
-					  boolean bookmark, boolean waveformProcessed, int[] amps) {
+					  boolean bookmark, boolean waveformProcessed, int[] amps, int[] marks) {
 		this.id = id;
 		this.name = name;
 		this.duration = duration;
@@ -63,13 +64,14 @@ public class Record {
 		this.bookmark = bookmark;
 		this.waveformProcessed = waveformProcessed;
 		this.amps = amps;
+		this.marks = marks;
 		this.data = int2byte(amps);
 //		this.data = AndroidUtils.int2byte(amps);
 	}
 
 	public Record(int id, String name, long duration, long created, long added, long removed, String path,
 					  String format, long size, int sampleRate, int channelCount, int bitrate,
-					  boolean bookmark, boolean waveformProcessed, byte[] amps) {
+					  boolean bookmark, boolean waveformProcessed, byte[] amps, int[] marks) {
 		this.id = id;
 		this.name = name;
 		this.duration = duration;
@@ -86,6 +88,7 @@ public class Record {
 		this.waveformProcessed = waveformProcessed;
 		this.amps = byte2int(amps);
 //		this.amps = AndroidUtils.byte2int(amps);
+		this.marks = marks;
 		this.data = amps;
 	}
 
@@ -165,6 +168,10 @@ public class Record {
 
 	public int[] getAmps() {
 		return amps;
+	}
+
+	public int[] getMarks() {
+		return marks;
 	}
 
 	public long getDuration() {

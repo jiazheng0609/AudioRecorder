@@ -50,6 +50,7 @@ public class AppRecorderImpl implements AppRecorder {
 	private final List<AppRecorderCallback> appCallbacks;
 	private final Prefs prefs;
 	private final IntArrayList recordingData;
+	private final IntArrayList markData;
 //	private long recordingDuration;
 	private final IntArrayList apmpPool;
 	private long durationMills = 0;
@@ -79,6 +80,7 @@ public class AppRecorderImpl implements AppRecorder {
 		this.prefs = pr;
 		this.appCallbacks = new ArrayList<>();
 		this.recordingData = new IntArrayList();
+		this.markData = new IntArrayList();
 		this.apmpPool = new IntArrayList();
 
 		recorderCallback = new RecorderContract.RecorderCallback() {
@@ -138,7 +140,8 @@ public class AppRecorderImpl implements AppRecorder {
 								info.getBitrate(),
 								record.isBookmarked(),
 								record.isWaveformProcessed(),
-								waveForm);
+								waveForm,
+								markData);
 						if (localRepository.updateRecord(update)) {
 							recordingData.clear();
 							final Record rec = localRepository.getRecord(update.getId());

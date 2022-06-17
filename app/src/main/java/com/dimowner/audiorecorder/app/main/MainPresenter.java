@@ -463,7 +463,8 @@ public class MainPresenter implements MainContract.UserActionsListener {
 								record.getBitrate(),
 								record.isBookmarked(),
 								record.isWaveformProcessed(),
-								record.getAmps());
+								record.getAmps(),
+								record.getMarks());
 						if (localRepository.updateRecord(MainPresenter.this.record)) {
 							AndroidUtils.runOnUIThread(() -> {
 								if (view != null) {
@@ -816,6 +817,7 @@ public class MainPresenter implements MainContract.UserActionsListener {
 								info.getBitrate(),
 								false,
 								false,
+								new int[ARApplication.getLongWaveformSampleCount()],
 								new int[ARApplication.getLongWaveformSampleCount()]);
 						record = localRepository.insertRecord(r);
 						final Record rec = record;
@@ -886,7 +888,8 @@ public class MainPresenter implements MainContract.UserActionsListener {
 								info.getBitrate(),
 								rec.isBookmarked(),
 								rec.isWaveformProcessed(),
-								rec.getAmps()));
+								rec.getAmps(),
+								rec.getMarks()));
 					}
 				}
 			}
@@ -913,7 +916,8 @@ public class MainPresenter implements MainContract.UserActionsListener {
 								info.getBitrate(),
 								trashRecord.isBookmarked(),
 								trashRecord.isWaveformProcessed(),
-								trashRecord.getAmps()));
+								trashRecord.getAmps(),
+								trashRecord.getMarks()));
 					}
 				}
 			}
