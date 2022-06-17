@@ -28,7 +28,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.MenuInflater;
 import android.view.View;
@@ -106,8 +105,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	private ImageButton btnRecordingStop;
 	private ImageButton btnShare;
 	private ImageButton btnImport;
-	private ImageButton btnTestAddtional1;
-	private ImageButton btnTestAddtional2;
+	private ImageButton btnMark1;
+	private ImageButton btnMark2;
 	private ProgressBar progressBar;
 	private SeekBar playProgress;
 	private LinearLayout pnlImportProgress;
@@ -190,8 +189,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		pnlRecordProcessing = findViewById(R.id.pnl_record_processing);
 		ivPlaceholder = findViewById(R.id.placeholder);
 		ivPlaceholder.setImageResource(R.drawable.waveform);
-		btnTestAddtional1 = findViewById(R.id.btn_test_additional1);
-		btnTestAddtional2 = findViewById(R.id.btn_test_additional2);
+		btnMark1 = findViewById(R.id.btn_test_additional1);
+		btnMark2 = findViewById(R.id.btn_test_additional2);
 
 		txtProgress.setText(TimeUtils.formatTimeIntervalHourMinSec2(0));
 
@@ -199,10 +198,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnDelete.setEnabled(false);
 		btnRecordingStop.setVisibility(View.INVISIBLE);
 		btnRecordingStop.setEnabled(false);
-		btnTestAddtional1.setVisibility(View.INVISIBLE);
-		btnTestAddtional1.setEnabled(false);
-		btnTestAddtional2.setVisibility(View.INVISIBLE);
-		btnTestAddtional2.setEnabled(false);
+		btnMark1.setVisibility(View.INVISIBLE);
+		btnMark1.setEnabled(false);
+		btnMark2.setVisibility(View.INVISIBLE);
+		btnMark2.setEnabled(false);
 
 		btnPlay.setOnClickListener(this);
 		btnRecord.setOnClickListener(this);
@@ -213,8 +212,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnSettings.setOnClickListener(this);
 		btnShare.setOnClickListener(this);
 		btnImport.setOnClickListener(this);
-		btnTestAddtional1.setOnClickListener(this);
-		btnTestAddtional2.setOnClickListener(this);
+		btnMark1.setOnClickListener(this);
+		btnMark2.setOnClickListener(this);
 		txtName.setOnClickListener(this);
 		space = getResources().getDimension(R.dimen.spacing_xnormal);
 
@@ -448,10 +447,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnShare.setVisibility(View.GONE);
 		btnDelete.setVisibility(View.VISIBLE);
 		btnDelete.setEnabled(true);
-		btnTestAddtional1.setVisibility(View.VISIBLE);
-		btnTestAddtional1.setEnabled(true);
-		btnTestAddtional2.setVisibility(View.VISIBLE);
-		btnTestAddtional2.setEnabled(true);
+		btnMark1.setVisibility(View.VISIBLE);
+		btnMark1.setEnabled(true);
+		btnMark2.setVisibility(View.VISIBLE);
+		btnMark2.setEnabled(true);
 		btnRecordingStop.setVisibility(View.VISIBLE);
 		btnRecordingStop.setEnabled(true);
 		playProgress.setProgress(0);
@@ -481,10 +480,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		playProgress.setEnabled(true);
 		btnDelete.setVisibility(View.INVISIBLE);
 		btnDelete.setEnabled(false);
-		btnTestAddtional1.setVisibility(View.INVISIBLE);
-		btnTestAddtional1.setEnabled(false);
-		btnTestAddtional2.setVisibility(View.INVISIBLE);
-		btnTestAddtional2.setEnabled(false);
+		btnMark1.setVisibility(View.INVISIBLE);
+		btnMark1.setEnabled(false);
+		btnMark2.setVisibility(View.INVISIBLE);
+		btnMark2.setEnabled(false);
 		btnRecordingStop.setVisibility(View.INVISIBLE);
 		btnRecordingStop.setEnabled(false);
 		waveformView.setVisibility(View.VISIBLE);
@@ -509,10 +508,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnRecord.setImageResource(R.drawable.ic_record_rec);
 		btnDelete.setVisibility(View.VISIBLE);
 		btnDelete.setEnabled(true);
-		btnTestAddtional1.setVisibility(View.VISIBLE);
-		btnTestAddtional1.setEnabled(true);
-		btnTestAddtional2.setVisibility(View.VISIBLE);
-		btnTestAddtional2.setEnabled(true);
+		btnMark1.setVisibility(View.VISIBLE);
+		btnMark1.setEnabled(true);
+		btnMark2.setVisibility(View.VISIBLE);
+		btnMark2.setEnabled(true);
 		btnRecordingStop.setVisibility(View.VISIBLE);
 		btnRecordingStop.setEnabled(true);
 		playProgress.setEnabled(false);
@@ -538,10 +537,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnShare.setVisibility(View.GONE);
 		btnDelete.setVisibility(View.VISIBLE);
 		btnDelete.setEnabled(true);
-		btnTestAddtional1.setVisibility(View.VISIBLE);
-		btnTestAddtional1.setEnabled(true);
-		btnTestAddtional2.setVisibility(View.VISIBLE);
-		btnTestAddtional2.setEnabled(true);
+		btnMark1.setVisibility(View.VISIBLE);
+		btnMark1.setEnabled(true);
+		btnMark2.setVisibility(View.VISIBLE);
+		btnMark2.setEnabled(true);
 		btnRecordingStop.setVisibility(View.VISIBLE);
 		btnRecordingStop.setEnabled(true);
 		playProgress.setProgress(0);
