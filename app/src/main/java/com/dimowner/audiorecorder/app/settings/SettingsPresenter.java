@@ -111,6 +111,7 @@ public class SettingsPresenter implements SettingsContract.UserActionsListener {
 				view.hideRecordsLocation();
 			}
 			view.showAskToRenameAfterRecordingStop(prefs.isAskToRenameAfterStopRecording());
+			view.showVibrateOnTap(prefs.isVibrateOnTap());
 			view.showKeepScreenOn(prefs.isKeepScreenOn());
 			view.showChannelCount(prefs.getSettingChannelCount());
 			view.showFPS(prefs.getSettingFPS());
@@ -144,6 +145,11 @@ public class SettingsPresenter implements SettingsContract.UserActionsListener {
 	@Override
 	public void askToRenameAfterRecordingStop(boolean b) {
 		prefs.setAskToRenameAfterStopRecording(b);
+	}
+
+	@Override
+	public void vibrateOnTap(boolean b) {
+		prefs.setVibrateOnTap(b);
 	}
 
 	@Override

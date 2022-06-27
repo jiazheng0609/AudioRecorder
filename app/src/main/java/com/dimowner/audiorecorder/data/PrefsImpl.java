@@ -35,6 +35,7 @@ public class PrefsImpl implements Prefs {
 	private static final String PREF_KEY_IS_STORE_DIR_PUBLIC = "is_store_dir_public";
 	private static final String PREF_KEY_IS_SHOW_DIRECTORY_SETTING = "is_show_directory_setting";
 	private static final String PREF_KEY_IS_ASK_TO_RENAME_AFTER_STOP_RECORDING = "is_ask_rename_after_stop_recording";
+	private static final String PREF_KEY_IS_VIBRATE_ON_TAP = "is_vibrate_on_tap";
 	private static final String PREF_KEY_ACTIVE_RECORD = "active_record";
 	private static final String PREF_KEY_RECORD_COUNTER = "record_counter";
 	private static final String PREF_KEY_THEME_COLORMAP_POSITION = "theme_color";
@@ -128,6 +129,23 @@ public class PrefsImpl implements Prefs {
 	public void setAskToRenameAfterStopRecording(boolean b) {
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.putBoolean(PREF_KEY_IS_ASK_TO_RENAME_AFTER_STOP_RECORDING, b);
+		editor.apply();
+	}
+
+	@Override
+	public boolean isVibrateOnTap() {
+		return sharedPreferences.contains(PREF_KEY_IS_VIBRATE_ON_TAP) && sharedPreferences.getBoolean(PREF_KEY_IS_VIBRATE_ON_TAP, true);
+	}
+
+	@Override
+	public boolean hasVibrateOnTapSetting() {
+		return sharedPreferences.contains(PREF_KEY_IS_VIBRATE_ON_TAP);
+	}
+
+	@Override
+	public void setVibrateOnTap(boolean b) {
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putBoolean(PREF_KEY_IS_VIBRATE_ON_TAP, b);
 		editor.apply();
 	}
 

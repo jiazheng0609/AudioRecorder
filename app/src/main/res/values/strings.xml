@@ -34,6 +34,7 @@
 		<item quantity="one">Copy %d selected record to the \'Downloads\' directory?</item>
 		<item quantity="other">Copy %d selected records to the \'Downloads\' directory?</item>
 	</plurals>
+	<string name="vibrate_on_tap_warn">你確定要在錄音時按標記按鈕有震動？震動時也會錄音到雜音喔。</string>
 	<string name="start_recording">Start recording</string>
 	<string name="recording_feature_disabled">Recording feature disabled</string>
 	<string name="restore_record">Restore record %s?</string>
@@ -103,6 +104,7 @@
 	<string name="downloading_cancel">Copy canceled</string>
 	<string name="share">Share</string>
 	<string name="ask_to_rename">Show rename dialog after recording is completed</string>
+	<string name="vibrate_on_tap">Vibrate on tapping mark button</string>
 	<string name="record_moved_into_trash">The record moved to trash</string>
 	<string name="selected_records_moved_into_trash">Selected records moved to trash</string>
 	<string name="all_records_deleted_successfully">All records deleted successfully</string>

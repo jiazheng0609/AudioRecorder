@@ -365,11 +365,16 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		} else if (id ==  R.id.btn_test_additional1) {
 			Timber.d("Mark Button A OnClick");
 			presenter.onMarkClick("Blue", "A");
-			view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+			if (presenter.isVibrateOnTap()) {
+				view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+			}
+
 		} else if (id ==  R.id.btn_test_additional2) {
 			Timber.d("Mark Button B OnClick");
 			presenter.onMarkClick("Green", "B");
-			view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+			if (presenter.isVibrateOnTap()) {
+				view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+			}
 		}
 	}
 

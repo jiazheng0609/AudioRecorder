@@ -31,6 +31,10 @@ public interface Prefs {
 	boolean hasAskToRenameAfterStopRecordingSetting();
 	void setAskToRenameAfterStopRecording(boolean b);
 
+	boolean isVibrateOnTap();
+	boolean hasVibrateOnTapSetting();
+	void setVibrateOnTap(boolean b);
+
 	void setPublicStorageMigrated(boolean b);
 	boolean isPublicStorageMigrated();
 	long getLastPublicStorageMigrationAsked();
