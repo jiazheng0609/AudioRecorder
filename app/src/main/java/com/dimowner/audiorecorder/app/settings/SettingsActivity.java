@@ -73,6 +73,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 	private Switch swPublicDir;
 	private Switch swKeepScreenOn;
 	private Switch swAskToRename;
+	private Switch swVibrateOnTap;
 
 	private Spinner nameFormatSelector;
 
@@ -151,6 +152,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 		swPublicDir = findViewById(R.id.swPublicDir);
 		swKeepScreenOn = findViewById(R.id.swKeepScreenOn);
 		swAskToRename = findViewById(R.id.swAskToRename);
+		swVibrateOnTap = findViewById(R.id.swVibrateOnTap);
 
 		txtRecordsCount = findViewById(R.id.txt_records_count);
 		txtTotalDuration= findViewById(R.id.txt_total_duration);
@@ -160,6 +162,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 
 		swKeepScreenOn.setOnCheckedChangeListener((btn, isChecked) -> presenter.keepScreenOn(isChecked));
 		swAskToRename.setOnCheckedChangeListener((btn, isChecked) -> presenter.askToRenameAfterRecordingStop(isChecked));
+		swVibrateOnTap.setOnCheckedChangeListener((btn, isChecked) -> presenter.vibrateOnTap(isChecked));
 
 		fpsSetting = findViewById(R.id.setting_fps);
 		fpss = getResources().getStringArray(R.array.fps2);
@@ -450,6 +453,11 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 	@Override
 	public void showAskToRenameAfterRecordingStop(boolean b) {
 		swAskToRename.setChecked(b);
+	}
+
+	@Override
+	public void showVibrateOnTap(boolean b) {
+		swVibrateOnTap.setChecked(b);
 	}
 
 	@Override

@@ -153,6 +153,8 @@ public interface MainContract {
 		//TODO: Remove this getters
 		boolean isStorePublic();
 
+		boolean isVibrateOnTap();
+
 		String getActiveRecordPath();
 
 		void deleteActiveRecord(boolean forever);

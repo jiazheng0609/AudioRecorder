@@ -20,7 +20,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
+import android.os.Vibrator;
 import android.provider.OpenableColumns;
+import android.view.HapticFeedbackConstants;
 
 import com.dimowner.audiorecorder.ARApplication;
 import com.dimowner.audiorecorder.AppConstants;
@@ -116,6 +118,9 @@ public class MainPresenter implements MainContract.UserActionsListener {
 		}
 		if (!prefs.hasAskToRenameAfterStopRecordingSetting()) {
 			prefs.setAskToRenameAfterStopRecording(true);
+		}
+		if (!prefs.hasVibrateOnTapSetting()) {
+			prefs.setVibrateOnTap(false);
 		}
 
 		if (appRecorderCallback == null) {
@@ -716,6 +721,9 @@ public class MainPresenter implements MainContract.UserActionsListener {
 	public boolean isStorePublic() {
 		return prefs.isStoreDirPublic();
 	}
+
+	@Override
+	public boolean isVibrateOnTap() { return prefs.isVibrateOnTap(); }
 
 	@Override
 	public String getActiveRecordPath() {
